@@ -3,6 +3,7 @@ import { PropertyCard } from "@/components/property-card"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { MapPin, Phone, Mail, Star } from "lucide-react"
+import Link from "next/link"
 
 const properties = [
   {
@@ -74,14 +75,16 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="text-lg px-8 bg-white border-white text-black hover:bg-white hover:text-primary">
-              Explore Our Properties
+             
+              <Link href="/accommodations"> Explore Our Properties</Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="text-lg px-8 bg-white border-white text-black hover:bg-white hover:text-primary"
             >
-              Book Your Stay
+              <Link href="/contact">Book Your Stay</Link>
+              
             </Button>
           </div>
         </div>

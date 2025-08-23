@@ -15,7 +15,13 @@ export function Footer() {
             </p>
             <div className="flex space-x-4">
               <Facebook className="w-5 h-5 hover:text-accent cursor-pointer transition-colors" />
-              <Instagram className="w-5 h-5 hover:text-accent cursor-pointer transition-colors" />
+              <a
+                href="https://www.instagram.com/thamosastays"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Instagram className="w-5 h-5 hover:text-accent cursor-pointer transition-colors" />
+              </a>
               <Twitter className="w-5 h-5 hover:text-accent cursor-pointer transition-colors" />
             </div>
           </div>
@@ -76,7 +82,7 @@ export function Footer() {
                 <div>
                   <p className="text-primary-foreground/90">First Floor, Third floor, 5/5, Shaheed Amit Bhardwaj Marg, Sector 5, </p>
                   <p className="text-primary-foreground/90">Malviya Nagar, Jaipur, Rajasthan 302017
-</p>
+                  </p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">

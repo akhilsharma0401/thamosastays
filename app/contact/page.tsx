@@ -106,7 +106,6 @@ export default function ContactPage() {
         message: formData.message.trim(),
       };
 
-      console.log("process.env.NEXT_PUBLIC_API_KEY", process.env.NEXT_PUBLIC_API_KEY)
       const res = await axios.post(`/api/save`, payload, {
         headers: {
           "x-secret-key": process.env.NEXT_PUBLIC_API_KEY,
@@ -137,7 +136,6 @@ export default function ContactPage() {
       })
       setEnteredOtp("")
     } catch (err: any) {
-      console.error("Error submitting form:", err);
       toast.error("Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
