@@ -19,6 +19,9 @@ export async function POST(request, response) {
 
         const dataFilePath = path.join(process.cwd(), "public/backend/data.txt");
 
+        const date = new Date().toLocaleDateString("en-IN", { timeZone: "Asia/Kolkata" });
+        const time = new Date().toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" });
+
         const payload = {
             Name: name,
             Email: email || "N/A",
@@ -28,7 +31,7 @@ export async function POST(request, response) {
             checkOutDate: checkOut,
             noOfGuest: noOfGuest || "N/A",
             Message: message || "N/A",
-            Timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+            Timestamp: `${date} ${time}`
         };
 
         if (!name || !phone || !checkIn || !checkOut) {

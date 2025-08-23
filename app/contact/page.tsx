@@ -374,6 +374,7 @@ export default function ContactPage() {
                           className="bg-white flex-1"
                           inputMode="numeric"
                           maxLength={10}
+                          disabled={otp.isVerify}
                         />
                         {!otp.isVerify ? (
                           <Button

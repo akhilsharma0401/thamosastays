@@ -16,6 +16,7 @@ export async function middleware(request) {
 
   const expectedSecretKey = process.env.API_SECRET_KEY;
 
+
   if (!secretKey || secretKey !== expectedSecretKey) {
     return new NextResponse(
       JSON.stringify({
