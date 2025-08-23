@@ -1,5 +1,6 @@
 import path, { join } from "path";
 import { promises as fs } from "fs";
+import axios from "axios";
 
 const filesDir = path.join(process.cwd(), "public/backend/files");
 
@@ -20,17 +21,17 @@ export async function POST(request, response) {
 
         const payload = {
             Name: name,
-            Email: email,
+            Email: email || "N/A",
             Phone: phone,
             ["Intrested Property"]: property,
             checkInDate: checkIn,
             checkOutDate: checkOut,
             noOfGuest: noOfGuest || "N/A",
             Message: message || "N/A",
-            Timestamp: new Date().toISOString("GMT+0530 (India Standard Time)"),
+            Timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
         };
 
-        if (!name || !email || !phone || !checkIn || !checkOut) {
+        if (!name || !phone || !checkIn || !checkOut) {
             return new Response(
                 JSON.stringify({
                     message: "All fields are required",
@@ -45,7 +46,7 @@ export async function POST(request, response) {
             );
         }
 
-        const textContent = `${payload.Name},${payload.Email},${payload.Phone},${payload.["Intrested Property"]},${payload.checkInDate},${payload.checkOutDate},${payload.noOfGuest},${payload.Message},${payload.Timestamp}`;
+        const textContent = `${payload.Timestamp},${payload["Intrested Property"]},${payload.Name},${payload.Phone},${payload.Email},${payload.checkInDate},${payload.checkOutDate},${payload.Message}`;
 
         await fs.appendFile(dataFilePath, textContent + "\n", (err) => {
             if (err) {
@@ -65,7 +66,23 @@ export async function POST(request, response) {
             //   res.send("Data saved");
         });
 
-        sendWhatsApp(payload)
+        const isSend = await sendWhatsApp(payload)
+
+        if (!isSend.status) {
+            return new Response(
+                JSON.stringify({
+                    message: isSend.message || "Something went wrong",
+
+                    status: false,
+                }),
+                {
+                    status: 400,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+        }
         return new Response(
             JSON.stringify({
                 message: "Data saved successfully",
@@ -99,7 +116,7 @@ export async function POST(request, response) {
 
 async function sendWhatsApp(data) {
     try {
-        const { Name, checkInDate, checkOutDate, noOfGuest, Phone } = data;
+        const { Name, checkInDate, checkOutDate, noOfGuest, Phone, Email } = data;
         const var2 = `${Name}, ${checkInDate}, ${checkOutDate}, ${noOfGuest}`
         const payload = {
             "template": {
@@ -108,13 +125,35 @@ async function sendWhatsApp(data) {
                         "type": "BODY",
                         "parameters": [
                             {
-                                "text": data.["Intrested Property"],
+                                "text": data["Intrested Property"],
                                 "type": "text"
                             },
                             {
-                                "text": var2,
+                                "text": Name,
+                                "type": "text"
+                            },
+                            {
+                                "text": Email,
+                                "type": "text"
+                            },
+                            {
+                                "text": Phone,
+                                "type": "text"
+                            },
+
+                            {
+                                "text": checkInDate,
+                                "type": "text"
+                            },
+                            {
+                                "text": checkOutDate,
+                                "type": "text"
+                            },
+                            {
+                                "text": noOfGuest,
                                 "type": "text"
                             }
+
                         ]
                     }
                 ],
@@ -140,7 +179,7 @@ async function sendWhatsApp(data) {
                                 "type": "text"
                             },
                             {
-                                "text": data.["Intrested Property"],
+                                "text": data["Intrested Property"],
                                 "type": "text"
                             },
                             {
@@ -164,7 +203,7 @@ async function sendWhatsApp(data) {
                     "policy": "deterministic"
                 }
             },
-            "to": Phone,
+            "to": `91${Phone}`,
             "type": "template",
             "messaging_product": "whatsapp"
         }
@@ -189,46 +228,25 @@ async function sendWhatsApp(data) {
                 "https://api.celitix.com/wrapper/waba/message",
                 customerPayload,
                 config
-            );
-        axios.post(
-            "https://api.celitix.com/wrapper/waba/message",
-            payload,
-            config
-        );
+            ),
+            axios.post(
+                "https://api.celitix.com/wrapper/waba/message",
+                payload,
+                config
+            )
         ])
 
         if (Array.isArray(admin?.data?.messages) && admin?.data?.messages[0]?.message_status === "accepted" || Array.isArray(customer?.data?.messages) && customer?.data?.messages[0]?.message_status === "accepted") {
-            return new Response(JSON.stringify({ status: true }), {
-                status: 200,
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+            return { status: true }
         } else {
-            return new Response(
-                JSON.stringify({ status: false, message: response.data }),
-                {
-                    status: 500,
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
+            return { status: false, message: response.data }
         }
     }
     catch (e) {
-        return new Response(
-            JSON.stringify({
-                message: "Internal Server Error",
-                status: false,
-                error: e.message,
-            }),
-            {
-                status: 500,
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
-        );
+        return {
+            message: "Internal Server Error",
+            status: false,
+            error: e.message,
+        }
     }
 }

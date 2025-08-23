@@ -194,7 +194,7 @@ export default function NearbyPlacesPage() {
         </section>
 
         {/* Dining Options */}
-        <section className="mb-16">
+        {/* <section className="mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-primary mb-4">Dining & Restaurants</h2>
             <p className="text-lg text-muted-foreground">
@@ -241,7 +241,7 @@ export default function NearbyPlacesPage() {
               </Card>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* Local Tips */}
         <section>

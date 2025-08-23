@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { DM_Sans } from "next/font/google"
 import "./globals.css"
 import { Footer } from "@/components/footer"
+import GlobalToaster from "@/components/GlobalToaster"
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en" className={dmSans.variable}>
       <body className="font-sans antialiased">
         {children}
+         <GlobalToaster />
         <Footer />
       </body>
     </html>
