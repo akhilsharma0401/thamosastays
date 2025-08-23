@@ -23,7 +23,7 @@ export function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             {/* <div className="text-2xl font-bold text-primary">Thamosa Stays</div> */}
-            <img src="/logo.png" alt="Logo" width={90} className="h-22" />
+            <img src="/logo.png" alt="Logo" width={90} className="lg:h-22 h-20" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -50,7 +50,7 @@ export function Navigation() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden">
+          <div className="md:hidden mt-2">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-card">
               {navItems.map((item) => (
                 <Link

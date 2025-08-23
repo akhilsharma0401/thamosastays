@@ -220,12 +220,6 @@ async function sendWhatsApp(data) {
             },
         };
 
-        const response = await axios.post(
-            "https://api.celitix.com/wrapper/waba/message",
-            payload,
-            config
-        );
-
         const [customer, admin] = await Promise.all([
             axios.post(
                 "https://api.celitix.com/wrapper/waba/message",
