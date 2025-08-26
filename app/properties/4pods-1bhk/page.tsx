@@ -30,7 +30,8 @@ export default function FourPods1BHKPage() {
     ],
     price: "₹3,200",
     capacity: "2-4 Guests",
-    location: "Family Residential Area",
+    location: "Malviya Nagar, Jaipur",
+    locationMap: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2971.1826270729266!2d75.80306867543715!3d26.84450417668786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDUwJzQwLjIiTiA3NcKwNDgnMjAuMyJF!5e1!3m2!1sen!2sin!4v1756190041311!5m2!1sen!2sin",
     detailedDescription: `Welcome to Four Pods, a collection of beautifully designed 1BHK private stays—Charcoal, Sage, Mocha, and Rosewood—crafted for the modern traveller seeking comfort, privacy, and style. Whether you're visiting Jaipur for work, a weekend getaway, or an extended stay, each pod offers a personalized experience in one of the city’s most safe and accessible neighbourhoods.
 Restaurants, Street food, Uber, Ola, Swiggy, Zomato and Blinkit easily available
 `,

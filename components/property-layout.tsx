@@ -20,6 +20,7 @@ interface PropertyLayoutProps {
   capacity: string
   location: string
   detailedDescription: string
+  locationMap?: string
 }
 
 export function PropertyLayout({
@@ -32,6 +33,7 @@ export function PropertyLayout({
   price,
   capacity,
   location,
+  locationMap: LocationMap,
   detailedDescription,
 }: PropertyLayoutProps) {
   return (
@@ -169,7 +171,7 @@ export function PropertyLayout({
             </Card>
             <div className="relative w-full overflow-hidden rounded-xl border aspect-video">
               <iframe
-                src={`https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`}
+                src={LocationMap}
                 title="Map"
                 className="absolute inset-0 h-full w-full"
                 loading="lazy"
