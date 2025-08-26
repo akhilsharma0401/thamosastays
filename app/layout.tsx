@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   description:
     "Experience comfort and warmth at Thamosa Stays. Choose from our diverse range of homestays and farm villas for an unforgettable stay.",
   generator: "v0.app",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
 }
 
 export default function RootLayout({

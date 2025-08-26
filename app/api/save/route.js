@@ -166,7 +166,7 @@ async function sendWhatsApp(data) {
                     "policy": "deterministic"
                 }
             },
-            "to": "919680003399",
+            "to": "919680149911",
             "type": "template",
             "messaging_product": "whatsapp"
         }

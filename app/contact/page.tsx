@@ -277,9 +277,9 @@ export default function ContactPage() {
             </div>
 
             <div className="grid grid-cols-1 gap-6">
-              <button onClick={handleSentOtp}>
+              {/* <button onClick={handleSentOtp}>
                 generarte
-              </button>
+              </button> */}
               {contactInfo.map((info, index) => (
                 <Card key={index} className="p-6">
                   <CardContent className="pt-0">
