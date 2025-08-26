@@ -4,6 +4,7 @@ import { DM_Sans } from "next/font/google"
 import "./globals.css"
 import { Footer } from "@/components/footer"
 import GlobalToaster from "@/components/GlobalToaster"
+import WhatsappChatbot from "@/components/WhatsappChatbot"
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         {children}
          <GlobalToaster />
+         <WhatsappChatbot />
         <Footer />
       </body>
     </html>
